@@ -7,6 +7,7 @@ import { About } from "./MyComponents/About";
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import NoteState from "./context/notes/NoteState";
+import ThemeState from "./context/notes/ThemeState";
 
 function App() {
   // 🔹 Initialize todos from localStorage
@@ -37,29 +38,31 @@ function App() {
 
   return (
     <div className="App-container">
-      <NoteState>
-        <Router>
-          <div className="content-wrap">
-            <Header title="My Todos List" searchBar={false} />
-            <Switch>
-              <Route
-                exact
-                path="/"
-                render={() => (
-                  <>
-                    <AddTodo addTodo={addTodo} />
-                    <Todos todos={todos} onDelete={onDelete} />
-                  </>
-                )}
-              />
-              <Route exact path="/about">
-                <About />
-              </Route>
-            </Switch>
-          </div>
-          <Footer />
-        </Router>
-      </NoteState>
+      <ThemeState>
+        <NoteState>
+          <Router>
+            <div className="content-wrap">
+              <Header title="My Todos List" searchBar={false} />
+              <Switch>
+                <Route
+                  exact
+                  path="/"
+                  render={() => (
+                    <>
+                      <AddTodo addTodo={addTodo} />
+                      <Todos todos={todos} onDelete={onDelete} />
+                    </>
+                  )}
+                />
+                <Route exact path="/about">
+                  <About />
+                </Route>
+              </Switch>
+            </div>
+            <Footer />
+          </Router>
+        </NoteState>
+      </ThemeState>
     </div>
   );
 }
